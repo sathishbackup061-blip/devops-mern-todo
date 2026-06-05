@@ -36,7 +36,7 @@ function App() {
         onChange={e => setText(e.target.value)}
         placeholder="New task"
       />
-      <button onClick={addTask}>Add</button>
+      <button onClick={addTask}>Add Task</button>
       <ul>
         {tasks.map(task => (
           <li key={task._id}>
