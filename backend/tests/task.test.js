@@ -1,21 +1,25 @@
-const request = require('supertest');
-const { server, app} = require('../index');
-const mongoose = require('mongoose');
+const request = require("supertest");
+const mongoose = require("mongoose");
+const app = require("../index");
 
-describe('GET api/tasks', () => {
-    it('it should return 200 ok', async () => {
-        const res = await request(app).get('/api/tasks');
-        expect(res.statusCode).toEqual(200);
-    });
+beforeAll(async () => {
+  await mongoose.connect(process.env.MONGO_URI);
+});
 
-    it('it should return an array of tasks', async () => {
-        const res = await request(app).get('/api/tasks');
-        expect(Array.isArray(res.body)).toBeTruthy();
-    });
+afterAll(async () => {
+  await mongoose.connection.close();
+});
 
+describe("GET api/tasks", () => {
+  it("should return 200 OK", async () => {
+    const res = await request(app).get("/api/tasks");
+
+    expect(res.statusCode).toBe(200);
   });
 
-  afterAll(async() => {
-    await mongoose.connection.close();
-    await server.close();
+  it("should return an array of tasks", async () => {
+    const res = await request(app).get("/api/tasks");
+
+    expect(Array.isArray(res.body)).toBe(true);
   });
+});
