@@ -1,15 +1,14 @@
 name: MERN CD
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
 
-```
 steps:
   - name: Deploy to EC2
     uses: appleboy/ssh-action@v1.2.0
@@ -27,4 +26,4 @@ steps:
         docker-compose up -d --build
 
         docker ps
-```
+
