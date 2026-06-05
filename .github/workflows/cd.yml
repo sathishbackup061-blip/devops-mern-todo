@@ -9,8 +9,9 @@ jobs:
 deploy:
 runs-on: ubuntu-latest
 
+```
 steps:
-  - name: Deploy via SSH
+  - name: Deploy to EC2
     uses: appleboy/ssh-action@v1.2.0
     with:
       host: ${{ secrets.EC2_HOST }}
@@ -24,3 +25,6 @@ steps:
 
         docker-compose down || true
         docker-compose up -d --build
+
+        docker ps
+```
