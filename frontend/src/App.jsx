@@ -30,13 +30,13 @@ function App() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>To-Do List with Devops DB Test</h1>
+      <h1>To-Do List with Devops</h1>
       <input
         value={text}
         onChange={e => setText(e.target.value)}
         placeholder="New task"
       />
-      <button onClick={addTask}>Add Task</button>
+      <button onClick={addTask}>Add </button>
       <ul>
         {tasks.map(task => (
           <li key={task._id}>
