@@ -2,9 +2,12 @@ name: MERN CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   test:
@@ -15,6 +18,12 @@ jobs:
       DATABASE: ${{ secrets.MONGO_URI }}
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
+    services:
+      mongo:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -24,13 +33,18 @@ jobs:
         with:
           node-version: 18
 
+      - name: Wait for MongoDB
+        run: sleep 10
+
       - name: Install Backend Dependencies
         working-directory: ./backend
         run: npm install
 
-      - name: Seed Database
+      - name: Debug Backend Files
         working-directory: ./backend
-        run: node seedTaskData.js
+        run: |
+          pwd
+          ls -la
 
       - name: Run Backend Tests
         working-directory: ./backend
@@ -40,6 +54,11 @@ jobs:
         working-directory: ./frontend
         run: npm install
 
+      - name: Build Frontend
+        working-directory: ./frontend
+        run: npm run build
+
+      # Uncomment if frontend tests exist
       # - name: Run Frontend Tests
       #   working-directory: ./frontend
       #   run: npm test
