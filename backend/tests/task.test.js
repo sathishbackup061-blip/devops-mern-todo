@@ -8,10 +8,9 @@ describe('GET api/tasks', () => {
         expect(res.statusCode).toEqual(200);
     });
 
-     it('it should return Object ok', async () => {
+    it('it should return an array of tasks', async () => {
         const res = await request(app).get('/api/tasks');
-        expect(typeof res.body).toBe('object');
-        expect(Array.isArray(res.body)).toBe(true);
+        expect(Array.isArray(res.body)).toBeTruthy();
     });
 
   });
