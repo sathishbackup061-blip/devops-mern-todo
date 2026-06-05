@@ -10,11 +10,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    services:
-      mongo:
-        image: mongo:latest
-        ports:
-          - 27017:27017
+    env:
+      PORT: ${{ secrets.PORT }}
+      DATABASE: ${{ secrets.MONGO_URI }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
     steps:
       - name: Checkout Repository
@@ -25,23 +24,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Wait for MongoDB
-        run: sleep 10
-
       - name: Install Backend Dependencies
         working-directory: ./backend
         run: npm install
 
       - name: Seed Database
         working-directory: ./backend
-        env:
-          DATABASE: mongodb://localhost:27017/testdb
         run: node seedTaskData.js
 
       - name: Run Backend Tests
         working-directory: ./backend
-        env:
-          DATABASE: mongodb://localhost:27017/testdb
         run: npm test
 
       - name: Install Frontend Dependencies
