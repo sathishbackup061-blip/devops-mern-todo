@@ -39,6 +39,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    needs: mongo-init
 
     steps:
       - name: Checkout Repository
