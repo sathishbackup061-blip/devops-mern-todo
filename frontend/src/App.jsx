@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const API = `${import.meta.env.VITE_API_URL}/tasks`;
+const VITE_API_URL ="http://13.206.146.114:5000/api"
+
+const API = `${VITE_API_URL}/tasks`;
 
 function App() {
   const [tasks, setTasks] = useState([]);
