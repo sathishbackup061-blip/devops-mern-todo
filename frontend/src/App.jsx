@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const VITE_API_URL ="http://113.233.196.0:5000/api"
+const VITE_API_URL ="http://13.233.196.0:5000/api"
 
 const API = `${VITE_API_URL}/tasks`;
 
